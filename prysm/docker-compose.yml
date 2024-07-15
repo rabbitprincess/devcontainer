@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  workspace:
+    build:
+      context: .
+    volumes:
+      - ./data:/data
+    ports:
+      - 9093:9093
