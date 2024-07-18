@@ -1,9 +1,9 @@
 FROM golang:latest
 
 # install dependencies
-RUN apt update && \
-    apt install -y sudo git nano curl cmake libssl-dev libgmp-dev libtinfo5 libprotoc-dev build-essential
-
+RUN apt-get -y update && apt-get install -y sudo jq wget curl gnupg git make bc ca-certificates && \
+    sudo rm -rf /var/lib/apt/lists
+    
 RUN go get -u github.com/golang/protobuf/proto
 
 # install nodejs and pnpm
