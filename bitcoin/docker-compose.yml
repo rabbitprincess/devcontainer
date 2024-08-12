@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  bitcoind:
+    container_name: bitcoind
+    build:
+      context: .
+    image: bitcoin/bitcoind
+    volumes:
+      - ./DATA/bitcoin/data:/bitcoin/.bitcoin
+    command:
+      - bitcoind
+      - --server
+      - --datadir=/bitcoin/.bitcoin
+    ports:
+      - 8332:8332
+      - 8333:8333
+    healthcheck:
+      test: ["CMD-SHELL", "bitcoin-cli getblockchaininfo > /dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
